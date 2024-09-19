@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home.html</title>
+</head>
+<body>
+<h1>Home</h1>
+<ul>
+    <li th:if="${user == null}"><a th:href="@{/login}">회원로그인</a> </li>
+    <li th:unless="${user == null}">
+        <span th:text="${user.username} + '님 반갑습니다'"></span>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="로그아웃">
+        </form>
+    </li>
+    <li><a th:href="@{/user/join}">회원가입</a> </li>
+    <li><a th:href="@{/sample/all}">모든사용자</a> </li>
+    <li><a th:href="@{/member/list}">회원페이지</a> </li>
+    <li><a th:href="@{/admin/main}">관리자페이지</a> </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>member.html</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<th:block th:replace="~{fragmenttest/layout::setContent(~{this::itemsFragment})}">
+  <div th:fragment="itemsFragment">
+    <h1>상품페이지</h1>
+    <img th:src="@{/images/miffy05.jpg}">
+  </div>
+</th:block>
+</html>

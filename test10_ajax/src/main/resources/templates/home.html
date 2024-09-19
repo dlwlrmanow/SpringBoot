@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<a th:href="@{/member}">회원관리페이지로 이동</a><br>
+<a th:href="@{/findid}">아이디 찾기</a><br>
+
+
+<button id="btn1">button1</button>
+<div id="result1"></div>
+
+<button id="btn2">button2</button>
+<div id="result2"></div>
+
+<button id="btn3">button3</button>
+<div id="result3"></div>
+
+<script type="text/javascript">
+  $("#btn3").click(function(){
+    $.ajax({
+      url:'/user/list',
+      dataType:'json',
+      type:'GET',
+      success:function(result){
+        for(let i=0;i<result.length;i++){
+          let user="<p>아이디:" + result[i].id +"<br>" +
+                  "비밀번호:" + result[i].password +"<br>" +
+                  "이메일:" + result[i].email +"</p>" ;
+          $("#result3").append(user);
+        }
+      }
+    })
+  });
+
+
+  $("#btn1").click(function(){
+    // alert('click!');
+
+    $.ajax({
+      url:'/user/info',
+      type:'get',
+      dataType:'json',
+      success:function(result){
+        //alert('success');
+        console.log(result);
+        let user="아이디:" + result.id +"<br>" +
+                "비밀번호:" + result.password +"<br>" +
+                "이메일:" + result.email ;
+        $("#result1").html(user);
+
+      }
+    });
+  });
+  $("#btn2").click(function(){
+    $.ajax({
+      url:'/user/info1/hello/1234',
+      type:'get',
+      dataType:'json',
+      success:function(result){
+        console.log(result);
+        let user="아이디:" + result.id +"<br>" +
+                "비밀번호:" + result.password +"<br>" +
+                "이메일:" + result.email ;
+        $("#result2").html(user);
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

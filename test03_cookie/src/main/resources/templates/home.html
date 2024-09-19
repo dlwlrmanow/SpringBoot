@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home.html</title>
+</head>
+<body>
+<h2>Home</h2>
+<img th:src="@{/1.jpg}"><br>
+<ul>
+    <li><a th:href="@{/member/login}">로그인</a> </li>
+    <li><a th:href="@{/member/item}">상품페이지</a> </li>
+    <li><a th:href="@{/member/board}">게시판</a> </li>
+</ul>
+</body>
+</html>

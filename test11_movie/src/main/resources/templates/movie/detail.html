@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<style>
+	.active{font-size: 1.3em; color:dodgerblue;}
+</style>
+</head>
+<body>
+<div>
+	<h2>영화제목 : [[${movie.title}]]</h2>
+	<p th:text="'영화감독 :' + ${movie.director}"></p>
+	<p th:text="|줄거리 :${movie.content}|"></p>
+</div>
+<!-- 댓글목록 -->
+<div id="commList">
+</div>
+<!-- 댓글등록 폼 -->
+<div class="commentsForm">
+	<h3>댓글</h3>
+	<p>작성자<br><input type='text' id='id'></p>
+	<p>내용<br><textarea id="comments"></textarea></p>
+	<p><input type='button' id='btnSave' value="등록"></p>
+</div>
+
+<script th:inline="javascript">
+	let mnum=[[${movie.mnum}]]
+	function commList(page){
+		$.ajax({
+			url:"/comm/list/"+ mnum +"/" + page,
+			dataType:'json',
+			type:'get',
+			success:function(result){
+				//console.log(result.list);
+				$("#commList").empty();
+				let html="";
+				$(result.list).each(function(i,comm){
+					html +="<div>" +
+							"아이디: <input value='" + comm.id +"' readonly><br>" +
+							"내용: <input value='" + comm.comments +"' readonly><br>" +
+							"<a href='javascipt:deleteComm(" + comm.cnum + ")'>삭제</a>" +
+							"<a href='javascipt:update("+ i +"," + comm.cnum + ")'>수정</a>" +
+						   "</div>";
+				});
+				$("#commList").append(html);
+				// 페이징처리
+				let pageing="";
+
+				// 이전페이지
+				if(result.startPage > 4){
+					pageing += "<a href='javascript:commList("+ (result.startPage - 1) +")'>이전</a>";
+				}
+
+				for(let i=result.startPage;i<=result.endPage;i++){
+					if(i == page){
+						pageing += "<a class='active' href='javascript:commList("+ i +")'>["+ i +"]</a>";
+					}else {
+						pageing += "<a href='javascript:commList("+ i +")'>["+ i +"]</a>";
+					}
+				}
+
+				// 다음페이지
+				if(result.endPage < result.totalPageCount - 1){
+					pageing += "<a href='javascript:commList("+ (result.endPage + 1) +")'>다음</a>";
+				}
+				$("#commList").append(pageing);
+			}
+		});
+	}
+	commList(0);
+	
+	
+	
+	
+	
+	$("#btnSave").click(function(){
+		const param="id=" + $("#id").val() +
+		            "&comments=" + $("#comments").val() 
+		            +"&mnum=" + mnum;
+		$.ajax({
+			url:"/comm/insert",
+			data:param,
+			type:'post',
+			dataType:'text',
+			success:function(data){
+				alert(data);
+			}
+		});
+	});
+</script>
+</body>
+</html>
+
+
+
+

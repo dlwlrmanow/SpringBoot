@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>파일목록</h1>
+<table border="1" width="500">
+	<tr>
+		<th>파일번호</th><th>작성자</th><th>제목</th><th>파일명</th><th>파일크기</th>
+	</tr>
+	<tr th:each="dto : ${list}">
+		<td>[[${dto.filenum }]]</td>
+		<td>[[${dto.writer }]]</td>
+		<td>[[${dto.title }]]</td>
+		<td>[[${dto.orgfilename }]]</td>
+		<td>[[${dto.filesize }]] bytes</td>
+		<td><a th:href="@{/file/info(filenum=${dto.filenum})}">상세보기</a></td>
+		<td><a th:href="@{/file/delete(filenum=${dto.filenum})}">삭제</a></td>
+	</tr>
+</table>
+<a th:href="@{/}">홈</a>
+</body>
+</html>

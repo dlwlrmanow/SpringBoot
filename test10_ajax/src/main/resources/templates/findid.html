@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>findId.html</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- 비밀번호와 이메일을 입력받아 해당 아이디 조회 -->
+<div>
+  비밀번호 <input type="text" name="pwd" id="pwd"><br>
+  이메일 <input type="text" name="email" id="email"><br>
+  <button id="find">아이디 찾기</button>
+
+  <div id="userinfo"></div>
+</div>
+
+<script th:inline="javascript">
+  $("#find").click(function (){
+    let pwd = $('#pwd').val();
+    let email = $('#email').val();
+    $.ajax({
+      url: '/findid/' + pwd + "/" + email, // MemberController의 mapping
+      dataType: 'json',
+      type: 'get',
+      success: function (data) {
+        if (data.find == true) {
+          $("#userinfo").html("<h1>id: " + data.id + "</h1>");
+        } else {
+          $("#userinfo").html("<h3>해당 정보가 존재하지 않습니다.</h3>");
+        }
+      }
+    })
+  })
+</script>
+</body>
+</html>

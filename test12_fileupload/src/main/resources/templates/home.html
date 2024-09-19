@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>home.html</title>
+</head>
+<body>
+<ul>
+	<li><a th:href="@{/file/upload}">파일올리기</a></li>
+	<li><a th:href="@{/file/uploadFiles}">다중파일올리기</a></li>
+	<!-- 파일번호/작성자/제목/업로드한파일명/파일크기 -->
+	<li><a th:href="@{/file/list}">파일목록</a></li>
+</ul>
+</body>
+</html>

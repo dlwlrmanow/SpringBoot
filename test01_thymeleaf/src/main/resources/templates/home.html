@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home.html</title>
+</head>
+<body>
+<h1>Home</h1>
+    <!--model에 담긴 메세지 출력하기-->
+    <div th:text="${msg}">헬로</div>
+    <!-- 변수 값은 ${} -->
+
+[[${msg}]]<br>
+<!-- [[${msg}]] thymeleaf 속성이 아니라 단순히 text만 출력-->
+
+<ul>
+    <!-- 메인으로 가는 페이지 -->
+    <li><a th:href="@{/main}">메인페이지</a></li>
+    <li><a th:href="@{/member}">회원페이지</a></li>
+    <li><a th:href="@{/items}">상품페이지</a></li>
+    <!-- 링크 값은 @{}-->
+    <li><a th:href="@{/sample/test01}">sample/test01</a></li>
+
+    <!-- test02Date 매핑경로로 이동하여 date 출력 -->
+    <li><a th:href="@{/sample/test02Date}">sample/test02Date</a> </li>
+
+    <!-- link 파라미터 넘기기 -->
+    <li><a th:href="@{/sample/link1(id='hello', pwd='1234')}">sample/link1</a></li>
+    <li><a th:href="@{/sample/link2/aaa/1234}">sample/link2</a></li>
+    <li><a th:href="@{/sample/link3/{id}/{pwd}(id='hello', pwd='1234')}">sample/link3</a></li>
+    <li><a th:href="@{/sample/form}">sample/form</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>form.html</title>
+<!--    <script type="text/javascript">-->
+<!--      let if = [[${mem.id}]];-->
+<!--      let pwd = [[${mem.pwd}]];-->
+<!--      console.log(id, pwd);-->
+<!--    </script>-->
+    <script th:inline="javascript"> // 콘솔에 찍히는 부분
+      let id = [[${mem.id}]];
+      let pwd = [[${mem.pwd}]];
+      console.log(id, pwd);
+    </script>
+</head>
+<body>
+<h3>회원정보</h3>
+  <form th:object="${mem}" th:action="@{/sample/formOk}">
+    id<input type="text" th:field="*{id}"><br> <!-- 멤버변수는 *{} -->
+    pwd<input type="password" th:field="*{pwd}"><br>
+    email<input type="text" th:field="*{email}"><br>
+    minor<input type="checkbox" th:field="*{minor}"><br>
+    <input type="submit" value="저장">
+  </form>
+</body>
+</html>

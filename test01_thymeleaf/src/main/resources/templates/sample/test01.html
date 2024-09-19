@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>test01.html</title>
+</head>
+<body>
+<!--<h3>Flower</h3>-->
+<!--<ul>-->
+<!--    <li th:each="flower:${list1}">-->
+<!--        <span th:text="${flower}"></span>-->
+<!--    </li>-->
+<!--</ul>-->
+<!--<h3>User</h3>-->
+<!--<ul>-->
+<!--    <li th:each="user, status:${list2}"> &lt;!&ndash; status 대신 아무 이름이나 변수로 써도 된다 &ndash;&gt;-->
+<!--        <span th:text="'index: ' + ${status.index} + ','"></span> &lt;!&ndash; index 속성 : 0 ~ &ndash;&gt; &lt;!&ndash;${} 앞에 텍스트를 주고 싶으면 &ndash;&gt;-->
+<!--        <span th:text="'count: ' + ${status.count} + ','"></span> &lt;!&ndash; count 속성 : 1 ~ &ndash;&gt;-->
+<!--        <span th:text="'username: ' + ${user.username} + ','"></span>-->
+<!--        <span th:text="'password: ' + ${user.password}"></span>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!-- with: 지역변수 선언-->
+<!-- user 중에서 인덱스 0번째만 뽑아오기-->
+<!--<div th:with="user1=${list2[0]}">-->
+<!--    <span th:text="${user1.username}"></span>-->
+<!--    <span th:text="${user1.password}"></span>-->
+<!--</div>-->
+<!--<br>-->
+
+<!-- Map에 저장된 value값 꺼내오기 -->
+<div th:text="${mem['name']}"></div> <!-- key값은 [] -->
+<div th:text="${mem['email']}"></div>
+
+<br>
+<!-- map User객체 담고 출력 -->
+<div th:text="${map02['user1']}"></div>
+<div th:text="${map02['user2']}"></div>
+
+<div th:text="${map02['user1'].username}"></div>
+<div th:text="${map02['user1'].password}"></div>
+</body>
+</html>

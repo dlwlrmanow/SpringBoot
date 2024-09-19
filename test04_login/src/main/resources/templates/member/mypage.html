@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>member/mypage.html</title>
+</head>
+<body>
+<h2>MyPage</h2>
+id: <span th:text="${member.id}"></span>
+email: <span th:text="${member.email}"></span>
+age: <span th:text="${member.age}"></span>
+regdate: <span th:text="${member.regdate}"></span>
+<a th:href="@{/}">home</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>member/board.html</title>
+</head>
+<body>
+<h2>게시판</h2>
+<ul>
+    <li th:each="board: ${list}">
+        <span th:text="${board}"></span>
+    </li>
+</ul>
+<a th:href="@{/}">Home</a>
+</body>
+</html>

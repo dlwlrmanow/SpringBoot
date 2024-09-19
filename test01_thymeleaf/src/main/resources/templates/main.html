@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main.html</title>
+</head>
+<body>
+<h1>main</h1>
+<!--th:insert="~{}: fragment 삽입하는 문법-->
+<div th:insert="~{fragmenttest/test::part1}"></div>
+<div th:replace="~{fragmenttest/test::part2}"></div>
+<div th:insert="~{fragmenttest/test::hello('반가워요')}"></div>
+<!--자기자신 안에서 갖고있기때문에 this::fragment이름 으로 써주기-->
+<div th:insert="~{fragmenttest/test::showFrag(~{this::myFrag})}"></div>
+
+
+<!--template/sample 폴더에 임의의 파일을 생성해서 fragment를 만들고 삽입-->
+<div th:insert="~{fragmenttest/fragment::test01}"></div>
+<div th:insert="~{fragmenttest/fragment::test02}"></div>
+<div th:insert="~{fragmenttest/fragment::hi('반가워요')}"></div>
+
+<div>
+  <h1>메인페이지의 콘텐츠...</h1>
+</div>
+<div th:fragment="myFrag" style="width: 300px;height: 200px;background-color: darkseagreen;">
+    <h3>아리랑 아리랑 아라리요</h3>
+</div>
+</body>
+</html>

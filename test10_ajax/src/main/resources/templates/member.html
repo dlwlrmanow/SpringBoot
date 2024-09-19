@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>member.html</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1 id="title">회원등록</h1>
+<form method="post" th:action="@{/member/join}">
+  아이디 <input type="text" name="id" id="id"><br>
+  비밀번호 <input type="password" name="pwd" id="pwd"><br>
+  이메일 <input type="text" name="email" id="email"><br>
+  나이 <input type="text" name="age" id="age"><br>
+  <input type="submit" value="가입" id="submit">
+</form>
+<div>
+  <table class="table" id="memlist">
+
+  </table>
+</div>
+<script th:inline="javascript">
+  function update(id){
+    alert(id);
+    $.ajax({
+      url:'/member/select/' + id,
+      type:'get',
+      success:function(data){
+        $("#title").html("<h1>회원수정</h1>");
+        $("#id").val(data.id);
+        $("#pwd").val(data.pwd);
+        $("#email").val(data.email);
+        $("#age").val(data.age);
+        $("#submit").val("수정");
+      }
+    });
+  }
+  function list(){
+    $.ajax({
+      url:'/member/list',
+      type:'get',
+      success:function(data){
+        $("#memlist").empty();
+        let th="<tr><th>아이디</th><th>이메일</th><th>나이</th><th>가입일</th><th>수정</th><th>삭제</th></tr>";
+        $("#memlist").append(th);
+        $(data).each(function(i,mem){
+          console.log(mem);
+          let tr="<tr>" +
+                  "<td>"+ mem.id +"</td>" +
+                  "<td>"+ mem.email +"</td>" +
+                  "<td>"+ mem.age +"</td>" +
+                  "<td>"+ mem.regdate +"</td>" +
+                  "<td><a href=\"javascript:update('"+mem.id +"')\">수정</a></td>" +
+                  "<td><a href=\"javascript:deleteMember('"+mem.id +"')\">삭제</a></td>" +
+                  "</tr>"
+          $("#memlist").append(tr);
+        });
+      }
+    });
+  }
+  list();
+
+  $("form").submit(function(e){
+    e.preventDefault();//submit안되게 하기
+    let param=$(this).serialize();//id=hello&pwd=1234&email=111@ ->쿼리스트링 문자열로만들기
+    if($("#submit").val()=='가입'){
+      $.ajax({
+        url:'/member/join',
+        type:'post',
+        data:param,
+        success:function(data){
+          alert(data);
+          list();
+        }
+      });
+    }else{
+      let data={"id":$("#id").val(),
+        "pwd":$("#pwd").val(),
+        "email":$("#email").val(),
+        "age":$("#age").val(),}}
+    //JSON.stringify(json객체) -> JSON객체를 문자열로 변환
+    //JSON.parse("json객체에 해당하는 문자열") -> 문자열을 json객체로 변환
+    $.ajax({
+      url:'/member/update',
+      type:'put',
+      contentType:'application/json',
+      data:jsonParam,
+      success:function(data){
+        alert(data);
+        list();
+        $("#id").val("");
+        $("#pwd").val("");
+        $("#email").val("");
+        $("#age").val("");
+        $("#submit").val("가입");
+      }
+    });
+  })
+  function deleteMember(id){
+    $.ajax({
+      url:'/member/delete/'+id,
+      type:'delete',
+      success:function(data){
+        alert(data);
+        list();
+      }
+    });
+  }
+</script>
+</body>
+</html>

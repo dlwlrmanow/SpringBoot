@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sample/fragment.html</title>
+</head>
+<body>
+<div th:fragment="test01" style="background-color: blanchedalmond;">
+  <h1>fragment test</h1>
+</div>
+<div th:fragment="test02" style="background-color: lightskyblue;">
+    <h1>test test test</h1>
+</div>
+<div th:fragment="hi(msg)" style="background-color: lightpink;">
+    <h1>[[${msg}]]</h1>
+</div>
+</body>
+</html>

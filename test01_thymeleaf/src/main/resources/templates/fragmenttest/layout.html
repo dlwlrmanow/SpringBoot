@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="setContent(content)">
+<head>
+    <meta charset="UTF-8">
+    <title>fragmenttest/layout.html</title>
+  <style>
+    *{margin:0; padding:0}
+    #wrap{width: 80%;}
+    .header{width: 100%;height: 100px;background-color: darkseagreen;}
+    .content{width: 100%;height: 600px;background-color: lightgoldenrodyellow; text-align: center;}
+    .footer{width: 100%;height: 100px;background-color: darkseagreen;}
+  </style>
+</head>
+<body>
+    <div id="wrap">
+      <div class="header">
+        <h1>header</h1>
+        <ul>
+          <li><a th:href="@{/member}">회원페이지</a> </li>
+          <li><a th:href="@{/items}">상품페이지</a> </li>
+        </ul>
+      </div>
+      <div class="content">
+        <th:block th:replace="${content}"> <!-- th:block - div처럼 영역을 나타내는 태그 -->
+        </th:block>
+      </div>
+      <div class="footer">
+        <h1>footer</h1>
+      </div>
+    </div>
+</body>
+</th:block>
+</html>

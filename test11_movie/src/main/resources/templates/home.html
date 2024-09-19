@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>우리우리 영화관</h1>
+<ul>
+    <li th:each="movie :${list}">
+        <a th:href="@{/movie/detail(mnum = ${movie.mnum})}" th:text="${movie.title}"></a>
+    </li>
+</ul>
+</body>
+</html>
